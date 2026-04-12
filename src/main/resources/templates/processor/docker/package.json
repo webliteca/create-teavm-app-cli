@@ -1,0 +1,11 @@
+{
+  "name": "{{PROCESSOR_MODULE_NAME}}",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+{{#DATABASE}}
+    "pg": "^8.13.0",
+{{/DATABASE}}
+    "@google-cloud/pubsub": "^4.9.0"
+  }
+}

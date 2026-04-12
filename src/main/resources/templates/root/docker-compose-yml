@@ -1,0 +1,103 @@
+version: "3.8"
+
+services:
+{{#DATABASE}}
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: {{APP_NAME_UNDERSCORE}}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./{{APP_NAME}}-api/docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+{{/DATABASE}}
+  {{APP_NAME}}-api:
+    build:
+      context: ./{{APP_NAME}}-api/docker
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+{{#DATABASE}}
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/{{APP_NAME_UNDERSCORE}}"
+{{/DATABASE}}
+{{#AUTH}}
+      FIREBASE_PROJECT_ID: "${FIREBASE_PROJECT_ID:-demo-project}"
+{{/AUTH}}
+{{#OBJECT_STORE}}
+      S3_ENDPOINT: "http://minio:9000"
+      S3_ACCESS_KEY: "minioadmin"
+      S3_SECRET_KEY: "minioadmin"
+      S3_BUCKET: "{{APP_NAME_UNDERSCORE}}"
+{{/OBJECT_STORE}}
+{{#MESSAGING}}
+      PUBSUB_EMULATOR_HOST: "pubsub-emulator:8085"
+{{/MESSAGING}}
+    volumes:
+      - ./{{APP_NAME}}-api/target/generated/js/app.js:/app/app.js:ro
+{{#DATABASE}}
+    depends_on:
+      db:
+        condition: service_healthy
+{{/DATABASE}}
+
+{{#FRONTEND}}
+  {{APP_NAME}}-frontend:
+    build:
+      context: ./{{APP_NAME}}-frontend/docker
+    ports:
+      - "8081:80"
+    volumes:
+      - ./{{APP_NAME}}-frontend/target/generated/js/app.js:/usr/share/nginx/html/js/app.js:ro
+      - ./{{APP_NAME}}-frontend/src/main/webapp/index.html:/usr/share/nginx/html/index.html:ro
+
+{{/FRONTEND}}
+{{#OBJECT_STORE}}
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - miniodata:/data
+
+{{/OBJECT_STORE}}
+{{#MESSAGING}}
+  pubsub-emulator:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+
+  pubsub-bridge:
+    build:
+      context: ./docker/pubsub-bridge
+    environment:
+      PUBSUB_EMULATOR_HOST: "pubsub-emulator:8085"
+      PUBSUB_PROJECT_ID: "${PUBSUB_PROJECT_ID:-demo-project}"
+    depends_on:
+      - pubsub-emulator
+
+{{/MESSAGING}}
+{{DOCKER_COMPOSE_SERVICES}}
+volumes:
+{{#DATABASE}}
+  pgdata:
+{{/DATABASE}}
+{{#OBJECT_STORE}}
+  miniodata:
+{{/OBJECT_STORE}}
+  placeholder: {}

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Building {{APP_NAME}}..."
+
+# Build common module
+echo "Building common module..."
+./mvnw -B -pl {{APP_NAME}}-common install -DskipTests
+
+# Build API module with TeaVM profile
+echo "Building API module..."
+./mvnw -B -pl {{APP_NAME}}-api package -Pteavm -DskipTests &
+
+{{#FRONTEND}}
+# Build frontend module
+echo "Building frontend..."
+./mvnw -B -pl {{APP_NAME}}-frontend package -Pteavm -DskipTests &
+{{/FRONTEND}}
+{{PROCESSOR_PROFILES}}
+# Wait for parallel builds
+wait
+
+# Start Docker Compose services
+echo "Starting Docker Compose services..."
+docker compose up --build

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>{{GROUP_ID}}</groupId>
+        <artifactId>{{APP_NAME}}</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>{{APP_NAME}}-frontend</artifactId>
+    <packaging>jar</packaging>
+
+    <name>{{APP_NAME}}-frontend</name>
+    <description>Frontend SPA for {{APP_NAME}}</description>
+
+    <properties>
+        <teavm.version>0.13.1</teavm.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>{{GROUP_ID}}</groupId>
+            <artifactId>{{APP_NAME}}-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-react-core</artifactId>
+            <version>{{TEAVM_REACT_VERSION}}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-classlib</artifactId>
+            <version>${teavm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-jso</artifactId>
+            <version>${teavm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-jso-apis</artifactId>
+            <version>${teavm.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.teavm</groupId>
+                <artifactId>teavm-maven-plugin</artifactId>
+                <version>${teavm.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile-js</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>{{PACKAGE}}.frontend.App</mainClass>
+                            <targetDirectory>${project.build.directory}/generated/js</targetDirectory>
+                            <targetFileName>app.js</targetFileName>
+                            <targetType>JAVASCRIPT</targetType>
+                            <optimizationLevel>ADVANCED</optimizationLevel>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

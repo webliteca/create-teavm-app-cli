@@ -1,0 +1,14 @@
+{
+  "name": "create-teavm-app",
+  "version": "0.1.0",
+  "description": "CLI tool to scaffold TeaVM + Cloud Run + Firebase applications",
+  "bin": {
+    "create-teavm-app": "jdeploy-bundle/jdeploy.js"
+  },
+  "jdeploy": {
+    "javaVersion": "21",
+    "type": "jar",
+    "jar": "target/create-teavm-app-0.1.0.jar"
+  },
+  "license": "MIT"
+}
