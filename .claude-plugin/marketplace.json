@@ -18,7 +18,7 @@
       "author": {
         "name": "webliteca"
       },
-      "source": "create-teavm-app",
+      "source": "./plugins/create-teavm-app",
       "category": "development",
       "keywords": [
         "teavm",
