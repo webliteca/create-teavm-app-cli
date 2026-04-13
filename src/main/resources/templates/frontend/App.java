@@ -11,8 +11,7 @@ import org.teavm.jso.dom.html.HTMLDocument;
 public class App {
     public static void main(String[] args) {
         var root = ReactDOM.createRoot(HTMLDocument.current().getElementById("root"));
-        JSObject app = React.wrapComponent(App::renderApp, "App");
-        root.render(React.createElement(app, null));
+        root.render(component(App::renderApp, "App"));
     }
 
     static ReactElement renderApp(JSObject props) {

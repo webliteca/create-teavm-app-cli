@@ -210,7 +210,7 @@ class CreateTeaVMAppTest {
         assertTrue(app.contains("import ca.weblite.teavmreact.hooks.*;"));
         assertTrue(app.contains("import static ca.weblite.teavmreact.html.Html.*;"));
         assertTrue(app.contains("ReactDOM.createRoot"));
-        assertTrue(app.contains("React.wrapComponent"));
+        assertTrue(app.contains("component(App::renderApp"));
         assertTrue(app.contains("Hooks.useState"));
     }
 
