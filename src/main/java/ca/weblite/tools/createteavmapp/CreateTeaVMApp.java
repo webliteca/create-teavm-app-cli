@@ -55,16 +55,16 @@ public class CreateTeaVMApp implements Callable<Integer> {
             description = "Processor service name (repeatable, implies --messaging)")
     private String[] processors;
 
-    @Option(names = "--teavm-lambda-version", defaultValue = "0.1.4",
+    @Option(names = "--teavm-lambda-version", defaultValue = "0.1.5",
             description = "teavm-lambda version")
     private String teavmLambdaVersion;
 
-    @Option(names = "--teavm-react-version", defaultValue = "0.1.1",
+    @Option(names = "--teavm-react-version", defaultValue = "0.1.2",
             description = "teavm-react version")
     private String teavmReactVersion;
 
-    @Option(names = "--teavm-version", defaultValue = "0.10.2",
-            description = "TeaVM compiler version (backend). Frontend always uses 0.13.1")
+    @Option(names = "--teavm-version", defaultValue = "0.13.1",
+            description = "TeaVM compiler version")
     private String teavmVersion;
 
     @Option(names = "--skip-frontend", defaultValue = "false",
