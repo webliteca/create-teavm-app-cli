@@ -67,9 +67,9 @@ java -jar create-teavm-app-0.1.0.jar \
 | `--object-store` | | `false` | Include R2/S3 object storage. Adds MinIO to docker-compose, @aws-sdk/client-s3 to package.json, teavm-lambda-objectstore/s3 deps. |
 | `--messaging` | | `false` | Include Pub/Sub messaging. Adds Pub/Sub emulator + bridge to docker-compose, teavm-lambda-messagequeue/pubsub deps. |
 | `--processor <name>` | | (none) | Repeatable. Creates a processor service module (implies `--messaging`). Each processor gets its own module with ProcessResource.java at `/process`. |
-| `--teavm-lambda-version` | | `0.1.4` | teavm-lambda framework version |
-| `--teavm-react-version` | | `0.1.1` | teavm-react library version |
-| `--teavm-version` | | `0.10.2` | TeaVM compiler version for backend modules. Frontend always uses `0.13.1`. |
+| `--teavm-lambda-version` | | `0.1.15` | teavm-lambda framework version |
+| `--teavm-react-version` | | `0.1.2` | teavm-react library version |
+| `--teavm-version` | | `0.13.1` | TeaVM compiler version |
 | `--skip-frontend` | | `false` | Skip generating the frontend module |
 | `--skip-workflows` | | `false` | Skip generating GitHub Actions workflows |
 
@@ -340,6 +340,6 @@ Re-run the CLI with `--processor <name>` or manually create the module following
 
 5. **Register deps before `new GeneratedRouter(container)`.** The router resolves all dependencies at construction time.
 
-6. **Frontend TeaVM version differs from backend.** Frontend uses `0.13.1`, backend uses the version specified by `--teavm-version` (default `0.10.2`). These are set in their respective `pom.xml` files.
+6. **Frontend and backend both use TeaVM `0.13.1` by default.** The version can be overridden via `--teavm-version`. The frontend pom.xml also declares its own `<teavm.version>` property.
 
 7. **`@Singleton` is teavm-lambda's annotation** — `ca.weblite.teavmlambda.api.annotation.Singleton`, not `javax.inject` or `jakarta.inject`.
