@@ -1,0 +1,66 @@
+# {{APP_NAME}}
+
+{{DESCRIPTION}}
+
+## Project Structure
+
+This is a multi-module Maven project using TeaVM Lambda for full-stack Java development.
+
+### Modules
+
+- **{{APP_NAME}}-common** — Shared models and interfaces
+- **{{APP_NAME}}-api** — Backend API service (compiles to JavaScript via TeaVM, runs on Cloud Run)
+{{#FRONTEND}}
+- **{{APP_NAME}}-frontend** — Frontend SPA (compiles to JavaScript via TeaVM React)
+{{/FRONTEND}}
+
+## Building
+
+```bash
+./mvnw clean package        # Build all modules
+./mvnw -pl {{APP_NAME}}-api package -Pteavm    # Build API with TeaVM profile
+./mvnw -pl {{APP_NAME}}-api package -Pjvm      # Build API with JVM profile
+```
+
+## Local Development
+
+```bash
+./setup-local.sh             # First-time setup (starts Docker services)
+./dev.sh                     # Start local dev environment
+```
+
+## Testing
+
+```bash
+cd {{APP_NAME}}-api && ./run-tests.sh    # Run API tests
+```
+
+## Technology Stack
+
+- **Language:** Java 21
+- **Backend Compiler:** TeaVM {{TEAVM_VERSION}} (compiles Java to JavaScript)
+- **Runtime:** Node.js on Cloud Run
+- **Framework:** teavm-lambda {{TEAVM_LAMBDA_VERSION}}
+{{#FRONTEND}}
+- **Frontend:** TeaVM React (teavm-react {{TEAVM_REACT_VERSION}})
+{{/FRONTEND}}
+{{#DATABASE}}
+- **Database:** PostgreSQL (Cloud SQL)
+{{/DATABASE}}
+{{#AUTH}}
+- **Auth:** Firebase Authentication with JWT validation
+{{/AUTH}}
+{{#OBJECT_STORE}}
+- **Object Storage:** R2/S3 compatible
+{{/OBJECT_STORE}}
+{{#MESSAGING}}
+- **Messaging:** Google Cloud Pub/Sub
+{{/MESSAGING}}
+
+## API Patterns
+
+- Resources use `@Path`, `@GET`, `@POST`, etc. annotations
+- Dependency injection via `@Component`, `@Singleton`, `@Inject`
+- Security via `@PermitAll` or `@RolesAllowed`
+- Constructor injection is preferred
+- Response objects: `Response.ok(body)`, `Response.status(code).entity(body)`

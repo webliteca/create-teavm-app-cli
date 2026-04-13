@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>{{GROUP_ID}}</groupId>
+    <artifactId>{{APP_NAME}}</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>{{APP_NAME}}</name>
+    <description>{{DESCRIPTION}}</description>
+
+    <modules>
+        {{MODULES}}
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>21</maven.compiler.release>
+        <teavm.lambda.version>{{TEAVM_LAMBDA_VERSION}}</teavm.lambda.version>
+        <teavm.version>{{TEAVM_VERSION}}</teavm.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Project modules -->
+            <dependency>
+                <groupId>{{GROUP_ID}}</groupId>
+                <artifactId>{{APP_NAME}}-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- TeaVM Lambda Core -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-core</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-processor</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-core-js</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-core-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Database -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-db-api</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-db</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-db-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Adapters -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-adapter-cloudrun</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-adapter-httpserver</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Auth -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-auth</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-auth-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Object Store -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-objectstore</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-s3</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-s3-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Messaging -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-messagequeue</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-pubsub</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-pubsub-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Image -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-image-api</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-image</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-image-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- Utilities -->
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-logging</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-compression</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ca.weblite</groupId>
+                <artifactId>teavm-lambda-compression-jvm</artifactId>
+                <version>${teavm.lambda.version}</version>
+            </dependency>
+
+            <!-- TeaVM -->
+            <dependency>
+                <groupId>org.teavm</groupId>
+                <artifactId>teavm-classlib</artifactId>
+                <version>${teavm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.teavm</groupId>
+                <artifactId>teavm-jso</artifactId>
+                <version>${teavm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.teavm</groupId>
+                <artifactId>teavm-jso-apis</artifactId>
+                <version>${teavm.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <release>21</release>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/nickhsharp/*</url>
+        </repository>
+    </repositories>
+</project>

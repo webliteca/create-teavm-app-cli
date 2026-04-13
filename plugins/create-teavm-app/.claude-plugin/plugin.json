@@ -1,0 +1,10 @@
+{
+  "name": "create-teavm-app",
+  "version": "0.1.0",
+  "description": "Scaffold a full-stack TeaVM + Cloud Run + Firebase application with a single command",
+  "author": {
+    "name": "webliteca"
+  },
+  "license": "MIT",
+  "skills": "./skills/"
+}

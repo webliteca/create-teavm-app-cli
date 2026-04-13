@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>{{GROUP_ID}}</groupId>
+        <artifactId>{{APP_NAME}}</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>{{APP_NAME}}-api</artifactId>
+    <packaging>jar</packaging>
+
+    <name>{{APP_NAME}}-api</name>
+    <description>Backend API service for {{APP_NAME}}</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>{{GROUP_ID}}</groupId>
+            <artifactId>{{APP_NAME}}-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-core</artifactId>
+        </dependency>
+{{#DATABASE}}
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-db-api</artifactId>
+        </dependency>
+{{/DATABASE}}
+{{#AUTH}}
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-auth</artifactId>
+        </dependency>
+{{/AUTH}}
+{{#OBJECT_STORE}}
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-objectstore</artifactId>
+        </dependency>
+{{/OBJECT_STORE}}
+{{#MESSAGING}}
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-messagequeue</artifactId>
+        </dependency>
+{{/MESSAGING}}
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ca.weblite</groupId>
+            <artifactId>teavm-lambda-compression</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <!-- TeaVM profile (default) — compiles Java to JavaScript -->
+        <profile>
+            <id>teavm</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-core-js</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-adapter-cloudrun</artifactId>
+                </dependency>
+{{#DATABASE}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-db</artifactId>
+                </dependency>
+{{/DATABASE}}
+{{#AUTH}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-auth</artifactId>
+                </dependency>
+{{/AUTH}}
+{{#OBJECT_STORE}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-s3</artifactId>
+                </dependency>
+{{/OBJECT_STORE}}
+{{#MESSAGING}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-pubsub</artifactId>
+                </dependency>
+{{/MESSAGING}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-compression</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.teavm</groupId>
+                    <artifactId>teavm-classlib</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.teavm</groupId>
+                    <artifactId>teavm-jso</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.teavm</groupId>
+                    <artifactId>teavm-jso-apis</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.13.0</version>
+                        <configuration>
+                            <release>21</release>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>ca.weblite</groupId>
+                                    <artifactId>teavm-lambda-processor</artifactId>
+                                    <version>${teavm.lambda.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>ca.weblite</groupId>
+                                    <artifactId>teavm-lambda-core</artifactId>
+                                    <version>${teavm.lambda.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.teavm</groupId>
+                        <artifactId>teavm-maven-plugin</artifactId>
+                        <version>${teavm.version}</version>
+                        <executions>
+                            <execution>
+                                <id>compile-js</id>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>{{PACKAGE}}.api.Main</mainClass>
+                                    <targetDirectory>${project.build.directory}/generated/js</targetDirectory>
+                                    <targetFileName>app.js</targetFileName>
+                                    <targetType>JAVASCRIPT</targetType>
+                                    <optimizationLevel>ADVANCED</optimizationLevel>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- JVM profile — runs on standard JVM for testing -->
+        <profile>
+            <id>jvm</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-core-jvm</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-adapter-httpserver</artifactId>
+                </dependency>
+{{#DATABASE}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-db-jvm</artifactId>
+                </dependency>
+{{/DATABASE}}
+{{#AUTH}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-auth-jvm</artifactId>
+                </dependency>
+{{/AUTH}}
+{{#OBJECT_STORE}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-s3-jvm</artifactId>
+                </dependency>
+{{/OBJECT_STORE}}
+{{#MESSAGING}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-pubsub-jvm</artifactId>
+                </dependency>
+{{/MESSAGING}}
+                <dependency>
+                    <groupId>ca.weblite</groupId>
+                    <artifactId>teavm-lambda-compression-jvm</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.13.0</version>
+                        <configuration>
+                            <release>21</release>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>ca.weblite</groupId>
+                                    <artifactId>teavm-lambda-processor</artifactId>
+                                    <version>${teavm.lambda.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>ca.weblite</groupId>
+                                    <artifactId>teavm-lambda-core</artifactId>
+                                    <version>${teavm.lambda.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

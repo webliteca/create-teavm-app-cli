@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Setting up local development environment for {{APP_NAME}}..."
+
+# Check prerequisites
+command -v docker >/dev/null 2>&1 || { echo "Docker is required but not installed. Aborting." >&2; exit 1; }
+command -v java >/dev/null 2>&1 || { echo "Java is required but not installed. Aborting." >&2; exit 1; }
+
+# Build the project first
+echo "Building project..."
+./mvnw -B clean install -DskipTests
+
+echo ""
+echo "Setup complete! Run ./dev.sh to start the local dev environment."
