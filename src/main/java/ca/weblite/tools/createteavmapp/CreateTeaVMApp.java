@@ -109,6 +109,19 @@ public class CreateTeaVMApp implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
+        String mode = System.getProperty("jdeploy.mode", "");
+        if ("gui".equals(mode)) {
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                javax.swing.JOptionPane.showMessageDialog(
+                    null,
+                    "create-teavm-app v0.1.0\n\nThis is a command-line tool.\nRun 'create-teavm-app' in a terminal for usage.",
+                    "About create-teavm-app",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+                );
+                System.exit(0);
+            });
+            return;
+        }
         int exitCode = new CommandLine(new CreateTeaVMApp()).execute(args);
         System.exit(exitCode);
     }

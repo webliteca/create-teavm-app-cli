@@ -5,10 +5,32 @@
   "bin": {
     "create-teavm-app": "jdeploy-bundle/jdeploy.js"
   },
+  "preferGlobal": true,
   "jdeploy": {
+    "jdk": false,
     "javaVersion": "21",
-    "type": "jar",
-    "jar": "target/create-teavm-app-0.1.0.jar"
+    "javafx": false,
+    "jar": "target/create-teavm-app-0.1.0.jar",
+    "title": "Create TeaVM App",
+    "commands": {
+      "create-teavm-app": {
+        "description": "Scaffold a full-stack TeaVM + Cloud Run + Firebase application"
+      }
+    }
   },
-  "license": "MIT"
+  "dependencies": {
+    "command-exists-promise": "^2.0.2",
+    "node-fetch": "2.6.7",
+    "tar": "^4.4.8",
+    "yauzl": "^2.10.0",
+    "shelljs": "^0.8.4"
+  },
+  "files": [
+    "jdeploy-bundle"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webliteca/create-teavm-app-cli.git"
+  },
+  "license": "ISC"
 }
