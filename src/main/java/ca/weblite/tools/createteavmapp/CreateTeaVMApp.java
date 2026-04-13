@@ -55,7 +55,7 @@ public class CreateTeaVMApp implements Callable<Integer> {
             description = "Processor service name (repeatable, implies --messaging)")
     private String[] processors;
 
-    @Option(names = "--teavm-lambda-version", defaultValue = "0.1.15",
+    @Option(names = "--teavm-lambda-version", defaultValue = "0.1.5",
             description = "teavm-lambda version")
     private String teavmLambdaVersion;
 

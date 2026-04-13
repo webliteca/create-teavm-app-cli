@@ -49,7 +49,7 @@ java -jar target/create-teavm-app-0.1.0.jar --name my-app --package com.example.
 | `--object-store` | | `false` | Include R2/S3 object storage |
 | `--messaging` | | `false` | Include Pub/Sub messaging |
 | `--processor` | | (none) | Repeatable. Processor service name (implies `--messaging`) |
-| `--teavm-lambda-version` | | `0.1.15` | teavm-lambda version |
+| `--teavm-lambda-version` | | `0.1.5` | teavm-lambda version |
 | `--teavm-react-version` | | `0.1.2` | teavm-react version |
 | `--teavm-version` | | `0.13.1` | TeaVM compiler version |
 | `--skip-frontend` | | `false` | Skip generating the frontend module |
