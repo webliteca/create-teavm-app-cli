@@ -49,7 +49,7 @@
     SET JAVACMD=%JAVA_HOME%\bin\java
 )
 
-%JAVACMD% %MAVEN_OPTS% -classpath "%~dp0.mvn\wrapper\maven-wrapper.jar" org.apache.maven.wrapper.MavenWrapperMain %MAVEN_CONFIG% %*
+%JAVACMD% %MAVEN_OPTS% "-Dmaven.multiModuleProjectDirectory=%MAVEN_PROJECTBASEDIR%" -classpath "%~dp0.mvn\wrapper\maven-wrapper.jar" org.apache.maven.wrapper.MavenWrapperMain %MAVEN_CONFIG% %*
 
 @IF %ERRORLEVEL% NEQ 0 GOTO error
 GOTO end
