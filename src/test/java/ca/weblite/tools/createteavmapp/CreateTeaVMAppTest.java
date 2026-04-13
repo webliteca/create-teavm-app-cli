@@ -79,8 +79,8 @@ class CreateTeaVMAppTest {
         assertTrue(Files.exists(projectDir.resolve("my-app-frontend/pom.xml")));
         assertTrue(Files.exists(projectDir.resolve("my-app-frontend/firebase.json")));
         assertTrue(Files.exists(projectDir.resolve("my-app-frontend/src/main/java/ca/weblite/myapp/frontend/App.java")));
+        assertTrue(Files.exists(projectDir.resolve("my-app-frontend/src/main/java/ca/weblite/myapp/frontend/AppConfig.java")));
         assertTrue(Files.exists(projectDir.resolve("my-app-frontend/src/main/webapp/index.html")));
-        assertTrue(Files.exists(projectDir.resolve("my-app-frontend/src/main/config/config.js")));
         assertTrue(Files.exists(projectDir.resolve("my-app-frontend/docker/Dockerfile")));
         assertTrue(Files.exists(projectDir.resolve("my-app-frontend/docker/nginx.conf")));
 
