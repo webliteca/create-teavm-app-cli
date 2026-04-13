@@ -1,0 +1,37 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "create-teavm-app-marketplace",
+  "description": "Marketplace for the create-teavm-app scaffolding tool — generates full-stack TeaVM + Cloud Run + Firebase applications",
+  "owner": {
+    "name": "webliteca",
+    "email": "[email protected]"
+  },
+  "metadata": {
+    "version": "0.1.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "create-teavm-app",
+      "description": "Scaffold a full-stack TeaVM + Cloud Run + Firebase application with a single command. Generates multi-module Maven projects with API backend, frontend SPA, processor services, Docker Compose, and GitHub Actions workflows.",
+      "version": "0.1.0",
+      "author": {
+        "name": "webliteca"
+      },
+      "source": "create-teavm-app",
+      "category": "development",
+      "keywords": [
+        "teavm",
+        "scaffold",
+        "generator",
+        "cloud-run",
+        "firebase",
+        "java",
+        "serverless",
+        "teavm-lambda",
+        "teavm-react",
+        "full-stack"
+      ]
+    }
+  ]
+}
