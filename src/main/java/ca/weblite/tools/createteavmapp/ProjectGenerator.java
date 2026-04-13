@@ -196,18 +196,16 @@ public class ProjectGenerator {
         Path moduleDir = projectDir.resolve(moduleName);
         Path srcDir = moduleDir.resolve("src/main/java/" + packagePath + "/frontend");
         Path webappDir = moduleDir.resolve("src/main/webapp");
-        Path configDir = moduleDir.resolve("src/main/config");
         Path dockerDir = moduleDir.resolve("docker");
         Files.createDirectories(srcDir);
         Files.createDirectories(webappDir);
-        Files.createDirectories(configDir);
         Files.createDirectories(dockerDir);
 
         writeTemplate("/frontend/pom.xml", moduleDir.resolve("pom.xml"));
         writeTemplate("/frontend/firebase.json", moduleDir.resolve("firebase.json"));
         writeTemplate("/frontend/App.java", srcDir.resolve("App.java"));
+        writeTemplate("/frontend/AppConfig.java", srcDir.resolve("AppConfig.java"));
         writeTemplate("/frontend/index.html", webappDir.resolve("index.html"));
-        writeTemplate("/frontend/config.js", configDir.resolve("config.js"));
         writeTemplate("/frontend/docker/Dockerfile", dockerDir.resolve("Dockerfile"));
         writeTemplate("/frontend/docker/nginx.conf", dockerDir.resolve("nginx.conf"));
     }
