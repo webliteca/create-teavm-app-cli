@@ -1,1 +1,3 @@
 install-skill-cli 0.1.0
+teavm-lambda {{TEAVM_LAMBDA_VERSION}}
+teavm-react {{TEAVM_REACT_VERSION}}
