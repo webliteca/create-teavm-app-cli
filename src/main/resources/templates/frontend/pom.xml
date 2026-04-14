@@ -32,6 +32,11 @@
         </dependency>
         <dependency>
             <groupId>org.teavm</groupId>
+            <artifactId>teavm-core</artifactId>
+            <version>${teavm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.teavm</groupId>
             <artifactId>teavm-classlib</artifactId>
             <version>${teavm.version}</version>
         </dependency>

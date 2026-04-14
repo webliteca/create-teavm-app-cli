@@ -67,8 +67,8 @@ java -jar create-teavm-app-0.1.0.jar \
 | `--object-store` | | `false` | Include R2/S3 object storage. Adds MinIO to docker-compose, @aws-sdk/client-s3 to package.json, teavm-lambda-objectstore/s3 deps. |
 | `--messaging` | | `false` | Include Pub/Sub messaging. Adds Pub/Sub emulator + bridge to docker-compose, teavm-lambda-messagequeue/pubsub deps. |
 | `--processor <name>` | | (none) | Repeatable. Creates a processor service module (implies `--messaging`). Each processor gets its own module with ProcessResource.java at `/process`. |
-| `--teavm-lambda-version` | | `0.1.5` | teavm-lambda framework version |
-| `--teavm-react-version` | | `0.1.2` | teavm-react library version |
+| `--teavm-lambda-version` | | `0.1.6` | teavm-lambda framework version |
+| `--teavm-react-version` | | `0.1.3` | teavm-react library version |
 | `--teavm-version` | | `0.13.1` | TeaVM compiler version |
 | `--skip-frontend` | | `false` | Skip generating the frontend module |
 | `--skip-workflows` | | `false` | Skip generating GitHub Actions workflows |
