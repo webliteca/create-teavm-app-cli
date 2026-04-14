@@ -105,6 +105,10 @@
                 </dependency>
                 <dependency>
                     <groupId>org.teavm</groupId>
+                    <artifactId>teavm-core</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.teavm</groupId>
                     <artifactId>teavm-classlib</artifactId>
                 </dependency>
                 <dependency>

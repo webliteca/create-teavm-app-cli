@@ -25,17 +25,17 @@ public class App {
                 .child(Nav.create().className("navbar")
                         .child(H1.create().text("{{APP_NAME_CAMEL}}").className("app-title").build())
                         .child(Div.create().className("nav-links")
-                                .child(button("Home").onClick(e -> currentPage.set("home")).className("nav-btn").build())
-                                .child(button("About").onClick(e -> currentPage.set("about")).className("nav-btn").build())
+                                .child(button("Home").onClick(e -> currentPage.setString("home")).className("nav-btn").build())
+                                .child(button("About").onClick(e -> currentPage.setString("about")).className("nav-btn").build())
 {{#AUTH}}
-                                .child(loggedIn.get() != null && loggedIn.getBool()
+                                .child(loggedIn.getBool()
                                         ? button("Logout").onClick(e -> loggedIn.setBool(false)).className("nav-btn").build()
                                         : button("Login").onClick(e -> loggedIn.setBool(true)).className("nav-btn").build())
 {{/AUTH}}
                                 .build())
                         .build())
                 .child(Div.create().className("content")
-                        .child(renderPage(currentPage.get()))
+                        .child(renderPage(currentPage.getString()))
                         .build())
                 .build();
     }
